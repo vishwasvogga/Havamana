@@ -3,13 +3,13 @@ package com.vpkarise.havamana.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.vpkarise.havamana.R;
+import com.vpkarise.havamana.util.CLog;
 import com.vpkarise.havamana.util.General;
 
 /**
@@ -18,13 +18,18 @@ import com.vpkarise.havamana.util.General;
 public class HomescreenActivity extends AppCompatActivity {
 
     EditText et_city=null;
+    String tag="'HomescreenActivity'";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set the view
         setContentView(R.layout.activity_homescreen);
+        //hide the toolbar
         hideTheToolBar();
+        //get view references
         getViewReferences();
+        //configure the views
         configureViews();
     }
 
@@ -47,9 +52,8 @@ public class HomescreenActivity extends AppCompatActivity {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
                 if  (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    Log.d("tag",String.valueOf(actionId));
+                    CLog.debug(tag,"Search key pressed");
                     //close the keypad and clear the focus
                     et_city.clearFocus();
                     General.closeKeyPad(HomescreenActivity.this,et_city.getWindowToken());
