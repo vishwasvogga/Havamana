@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Havamana</string>
+    <string name="hs_info">Search the city name to get weather information</string>
+    <string name="hs_search_placeholder">city name</string>
+</resources>
