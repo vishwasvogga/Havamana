@@ -1,14 +1,16 @@
-package com.vpkarise.havamana;
+package com.vpkarise.havamana.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.vpkarise.havamana.R;
+import com.vpkarise.havamana.util.General;
 
 /**
  * Home screen activity where we search the cities
@@ -48,9 +50,9 @@ public class HomescreenActivity extends AppCompatActivity {
 
                 if  (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     Log.d("tag",String.valueOf(actionId));
+                    //close the keypad and clear the focus
                     et_city.clearFocus();
-                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    in.hideSoftInputFromWindow(et_city.getWindowToken(), 0);
+                    General.closeKeyPad(HomescreenActivity.this,et_city.getWindowToken());
                     return false;
                 }
                 return true;
