@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.vpkarise.havamana.Constants;
 import com.vpkarise.havamana.R;
 import com.vpkarise.havamana.util.CLog;
 import com.vpkarise.havamana.util.General;
@@ -53,9 +54,10 @@ public class HomescreenActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if  (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    CLog.debug(tag,"Search key pressed");
+
                     //close the keypad and clear the focus
                     et_city.clearFocus();
+                    CLog.debug(tag,"Search key pressed"+url);
                     General.closeKeyPad(HomescreenActivity.this,et_city.getWindowToken());
                     return false;
                 }
