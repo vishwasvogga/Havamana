@@ -3,4 +3,6 @@
     <string name="hs_info">Search the city to get weather information</string>
     <string name="hs_search_placeholder">City name</string>
     <string name="hs_search_enter_valid">Please enter valid city</string>
+    <string name="hs_loading_weather">Loading weather..</string>
+    <string name="please_await">Please wait</string>
 </resources>

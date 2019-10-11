@@ -135,9 +135,7 @@ public class HRequest {
         }
         try{
             jsonObject.put("success",isSuccess);
-            if(isSuccess==false){
-                jsonObject.put("errorcode",errorCode);
-            }
+            jsonObject.put("errorcode",errorCode);
             return jsonObject;
         }catch (Exception e){
             return new JSONObject();
