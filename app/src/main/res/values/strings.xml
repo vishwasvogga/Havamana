@@ -5,4 +5,7 @@
     <string name="hs_search_enter_valid">Please enter valid city</string>
     <string name="hs_loading_weather">Loading weather..</string>
     <string name="please_await">Please wait</string>
+    <string name="ok">Ok</string>
+    <string name="not_found_city">Not found! Please search a nearest mainstream city.</string>
+    <string name="exceeded_limit">You have exceeded the limit. Please try after sometime</string>
 </resources>

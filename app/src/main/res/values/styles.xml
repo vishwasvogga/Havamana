@@ -13,7 +13,10 @@
         <item name="android:editTextColor">@color/color_text_dark</item>
         <item name="android:textColorPrimary">@color/color_text_dark</item>
         <item name="android:textColorSecondary">@color/color_text_light</item>
+    </style>
 
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+       <item name="android:background">@color/background_light</item>
     </style>
 
 

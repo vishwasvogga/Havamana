@@ -1,10 +1,13 @@
 package com.vpkarise.havamana.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 
 import com.vpkarise.havamana.R;
 import com.vpkarise.havamana.model.HWeatherModel;
@@ -102,6 +105,30 @@ public class HHomescreenActivity extends AppCompatActivity {
                 weatherModel.parseJson(jsonObject);
                 HCLog.debug(tag, weatherModel.toString());
                 HProgressDialog.dismiss();
+
+
+                //check the response
+                if(weatherModel.isSuccess==true){
+                    //go to weather details page
+
+                }else{
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            new ContextThemeWrapper(HHomescreenActivity.this, R.style.AlertDialogCustom));
+                    if(weatherModel.errorCode==404){
+                       alertDialogBuilder.setMessage(R.string.not_found_city);
+                    }else if(weatherModel.errorCode==429){
+                        alertDialogBuilder.setMessage(R.string.exceeded_limit);
+                    }
+                    alertDialogBuilder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //clear search string
+                            sv_city.setQuery("",false);
+                        }
+                    });
+                    AlertDialog alertDialog= alertDialogBuilder.create();
+                    alertDialogBuilder.show();
+                }
             }
 
             @Override
@@ -123,4 +150,7 @@ public class HHomescreenActivity extends AppCompatActivity {
         HDisposableManager.dispose();
         HWeatherRequest.getInstance().cancelAllRequests();
     }
+
+
+
 }
