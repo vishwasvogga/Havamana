@@ -6,7 +6,7 @@ import android.widget.Toast;
 /**
  * This class provides custom toast methods
  */
-public class CToast {
+public class HCToast {
 
     /**
      * Show toast with default duration (Long)

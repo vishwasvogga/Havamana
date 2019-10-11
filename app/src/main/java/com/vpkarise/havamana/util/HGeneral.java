@@ -8,7 +8,7 @@ import android.widget.Toast;
 /**
  * This class provides general utilities
  */
-public class General {
+public class HGeneral {
 
     /**
      * Close the keypad programmatically
