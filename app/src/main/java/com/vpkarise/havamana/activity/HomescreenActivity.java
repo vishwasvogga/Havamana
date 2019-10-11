@@ -1,14 +1,14 @@
 package com.vpkarise.havamana.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.vpkarise.havamana.Constants;
 import com.vpkarise.havamana.R;
 import com.vpkarise.havamana.util.CLog;
 import com.vpkarise.havamana.util.General;
@@ -18,7 +18,7 @@ import com.vpkarise.havamana.util.General;
  */
 public class HomescreenActivity extends AppCompatActivity {
 
-    EditText et_city=null;
+    SearchView sv_city =null;
     String tag="'HomescreenActivity'";
 
     @Override
@@ -42,26 +42,24 @@ public class HomescreenActivity extends AppCompatActivity {
 
     // Get the view references
     private void getViewReferences(){
-        et_city = findViewById(R.id.et_homescreen_city);
+        sv_city = findViewById(R.id.et_homescreen_city);
     }
 
     //configure views
     private void configureViews(){
-        //edit text (Search city)
-        //Onclick press of search in edit text keypad, start searching for the weather of that particular city
-        et_city.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
+        //Onclick of search detection
+        sv_city.setOnSearchClickListener(new View.OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if  (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            public void onClick(View v) {
+                CharSequence queryText = sv_city.getQuery();
+                if(queryText== null || queryText.equals("")){
+                    //invalid search  query
 
-                    //close the keypad and clear the focus
-                    et_city.clearFocus();
-                    CLog.debug(tag,"Search key pressed"+url);
-                    General.closeKeyPad(HomescreenActivity.this,et_city.getWindowToken());
-                    return false;
+                }else{
+                    //search the weather of that city
+
                 }
-                return true;
             }
         });
     }

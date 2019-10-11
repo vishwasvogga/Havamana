@@ -1,4 +1,5 @@
-<resources>
+<resources >
+
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -6,6 +7,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/color_text_light</item>
+        <item name="android:textColor">@color/color_text_dark</item>
+        <item name="android:fontFamily"> @font/font_havamana_def</item>
     </style>
 
 
