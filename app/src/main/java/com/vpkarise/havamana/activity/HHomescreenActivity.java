@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.vpkarise.havamana.R;
+import com.vpkarise.havamana.model.HWeatherModel;
 import com.vpkarise.havamana.network.HDisposableManager;
 import com.vpkarise.havamana.network.HRequest;
 import com.vpkarise.havamana.network.HWeatherRequest;
@@ -90,11 +91,16 @@ public class HHomescreenActivity extends AppCompatActivity {
 
 
     public void searchForCityWeather(String cityname) {
+        //replace all spaces by %
+        cityname = cityname.replaceAll(" ","%");
         HProgressDialog.create(getString(R.string.please_await),getString(R.string.hs_loading_weather),this);
         HWeatherRequest.getInstance().searchWeatherByCity(cityname).subscribe(new SingleObserver<JSONObject>() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 HCLog.debug(tag, jsonObject.toString());
+                HWeatherModel weatherModel = new HWeatherModel();
+                weatherModel.parseJson(jsonObject);
+                HCLog.debug(tag, weatherModel.toString());
                 HProgressDialog.dismiss();
             }
 
