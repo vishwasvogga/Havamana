@@ -16,6 +16,9 @@ public class HCLog {
      */
     public static void debug(String tag, String msg){
         if(HConfig.LOG_LEVEL==2){
+            if(msg==null){
+                msg = "null";
+            }
             Log.d(tag,msg);
         }
     }
@@ -26,6 +29,9 @@ public class HCLog {
      */
     public static void error(String tag, String msg){
         if(HConfig.LOG_LEVEL>0){
+            if(msg==null){
+                msg = "null";
+            }
             Log.e(tag,msg);
         }
     }
