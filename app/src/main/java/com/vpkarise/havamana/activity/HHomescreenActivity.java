@@ -23,7 +23,9 @@ import com.vpkarise.havamana.util.HProgressDialog;
 import org.json.JSONObject;
 
 import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Home screen activity where we search the cities
@@ -113,7 +115,10 @@ public class HHomescreenActivity extends AppCompatActivity {
         //replace all spaces by %
         cityname = cityname.replaceAll(" ","%");
         HProgressDialog.create(getString(R.string.please_await),getString(R.string.hs_loading_weather),this);
-        HWeatherRequest.getInstance().searchWeatherByCity(cityname).subscribe(new SingleObserver<JSONObject>() {
+        HWeatherRequest.getInstance().searchWeatherByCity(cityname)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<JSONObject>() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 HCLog.debug(tag, jsonObject.toString());
