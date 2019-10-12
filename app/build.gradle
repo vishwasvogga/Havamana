@@ -13,8 +13,16 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file("/havamana_release_key.jks") //check that the file exists
+            storePassword "!2345Qwert"
+            keyAlias "havamana"
+            keyPassword "!2345Qwert"
         }
     }
 }
