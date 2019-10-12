@@ -8,4 +8,9 @@
     <string name="ok">Ok</string>
     <string name="not_found_city">Not found! Please search a nearest mainstream city.</string>
     <string name="exceeded_limit">You have exceeded the limit. Please try after sometime</string>
+    <string name="back">Back</string>
+    <string name="city">City</string>
+    <string name="temparature">Temparature</string>
+    <string name="weather">Weather</string>
+    <string name="wind">Wind</string>
 </resources>

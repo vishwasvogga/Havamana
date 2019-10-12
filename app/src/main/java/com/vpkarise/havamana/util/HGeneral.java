@@ -21,4 +21,14 @@ public class HGeneral {
             in.hideSoftInputFromWindow(ibinder, 0);
         }
     }
+
+    /**
+     * Converts a double to string and restricts the decimal places
+     * @param d double value
+     * @param digits number of digits
+     * @return String
+     */
+    public static String setDecimalPlaces(double d,int digits){
+        return String.format("%."+digits+'f', d);
+    }
 }

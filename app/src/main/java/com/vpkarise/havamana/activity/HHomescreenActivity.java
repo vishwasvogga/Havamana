@@ -6,9 +6,11 @@ import androidx.appcompat.widget.SearchView;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 
+import com.vpkarise.havamana.HState;
 import com.vpkarise.havamana.R;
 import com.vpkarise.havamana.model.HWeatherModel;
 import com.vpkarise.havamana.network.HDisposableManager;
@@ -49,17 +51,24 @@ public class HHomescreenActivity extends AppCompatActivity {
     }
 
 
-    //hide the action bar
+
+    /**
+     * Hide the toolbar
+     */
     private void hideTheToolBar() {
         getSupportActionBar().hide(); //hide the title bar
     }
 
-    // Get the view references
+    /**
+     * Get view refrences
+     */
     private void getViewReferences() {
         sv_city = findViewById(R.id.et_homescreen_city);
     }
 
-    //configure views
+    /**
+     * Configure views
+     */
     private void configureViews() {
 
         //Onclick of search detection
@@ -85,6 +94,9 @@ public class HHomescreenActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Initialise system
+     */
     public void intialiseSystem() {
         //get base baseContext
         baseContext = getBaseContext();
@@ -93,6 +105,10 @@ public class HHomescreenActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Search city weather
+     * @param cityname cityname
+     */
     public void searchForCityWeather(String cityname) {
         //replace all spaces by %
         cityname = cityname.replaceAll(" ","%");
@@ -102,20 +118,27 @@ public class HHomescreenActivity extends AppCompatActivity {
             public void onSuccess(JSONObject jsonObject) {
                 HCLog.debug(tag, jsonObject.toString());
                 HWeatherModel weatherModel = new HWeatherModel();
+                //parse the json data to weather model
                 weatherModel.parseJson(jsonObject);
                 HCLog.debug(tag, weatherModel.toString());
                 HProgressDialog.dismiss();
 
 
                 //check the response
+                //Incase of error show alert dialog
+                // Incase of success call weather detail activity
                 if(weatherModel.isSuccess==true){
                     //go to weather details page
-
+                    HState.getInstance().weatherData = weatherModel;
+                    Intent intent = new Intent(HHomescreenActivity.this,HWeatherDetailsScreenActivity.class);
+                    startActivity(intent);
                 }else{
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                             new ContextThemeWrapper(HHomescreenActivity.this, R.style.AlertDialogCustom));
+                    //city not found
                     if(weatherModel.errorCode==404){
                        alertDialogBuilder.setMessage(R.string.not_found_city);
+                    //API limit exceeded
                     }else if(weatherModel.errorCode==429){
                         alertDialogBuilder.setMessage(R.string.exceeded_limit);
                     }
@@ -126,7 +149,6 @@ public class HHomescreenActivity extends AppCompatActivity {
                             sv_city.setQuery("",false);
                         }
                     });
-                    AlertDialog alertDialog= alertDialogBuilder.create();
                     alertDialogBuilder.show();
                 }
             }
@@ -147,7 +169,9 @@ public class HHomescreenActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //destroy any existing disposable
         HDisposableManager.dispose();
+        //cancel any ongoing request
         HWeatherRequest.getInstance().cancelAllRequests();
     }
 

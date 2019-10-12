@@ -27,7 +27,10 @@ public class HWeatherModel {
     public double wind_direction = 0;
 
 
-
+    /**
+     * Parse the json object to this model object
+     * @param object jsonObject containin =g weather details
+     */
     public void parseJson(JSONObject object){
         try{
             isSuccess = object.getBoolean("success");
@@ -54,6 +57,9 @@ public class HWeatherModel {
     }
 
     @Override
+    /**
+     * Display object as string
+     */
     public String toString() {
         return "HWeatherModel{" +
                 "isSuccess=" + isSuccess +
